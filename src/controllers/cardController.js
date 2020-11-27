@@ -3,40 +3,40 @@ const cardController = {}
 const puppeteer = require('puppeteer');
 const fs = require('fs-extra');
 const path = require('path');
-const hbs = require('handlebars');
+const handlebars = require('handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const moment = require('moment');
+const mongoose = require('mongoose');
+// Models
 const CardsModel = require('../models/CardsModel');
+const User = require('../models/User');
+
+// this sentence heps us to transform string objects to hbs based readable objects
+const hbs = allowInsecurePrototypeAccess(handlebars);
+
 // This is actually a post request
 cardController.getCard = async (req, res) => {
-    
+    var arrIds = [];
     //CONSULTAMOS EL REGISTRO DE LA BD
-    const cred= req.body.formato;
-    const query=cred.toString();
-    const content = await CardsModel.find({"nombreCredencial": `${query}`})
+    const query = req.body.formato.toString();
+    // Getting card's data from database
+    const content = await CardsModel.findOne({"nombreCredencial": `${query}`})
       .then(data => {
-        if (!data)
-          console.log("Data no encontrada");
+        if (!data) console.log("Data no encontrada");
         else console.log("Exito al obtener la data");
-        return data
+        return data;
       })
-      .catch(err => {
-        console.log("Error Consulta: "+err)
-      });
-    //const arrayQuery={credenciales:content};//ESTO CONTIENE LA DATA DE LA COSULTA EN JSON
-    // Storage data from the request
-    
-    /*------------------>
-    LA SOLUCION AL PROBLEMA ES PASAR UNICAMENTE LOS ARRAYS CON LOS DATOS DE LAS IMAGENES
-      PROCESAR MEDIANTE UN SEGUNDO CICLO ESOS DATOS PARA MOSTRARLOS
-    <------------------- */
-    const data = req.body;
-    console.log(content[0].contenido)
-    data.usuarios[0].credencial= content.logos;
-    data.usuarios[0].credencialArray= content[0].logos;
-    data.usuarios[0].nombreCred=content[0].nombreCredencial;
-    console.log(data);
-    console.log('----------------------')
-    console.log(content[0])
+      .catch(err => console.log("Error Consulta: "+err));
+    // Transforming ids to mongoose readable id objects
+    req.body.usuarios.forEach(idUser => 
+      arrIds.push(mongoose.Types.ObjectId(idUser))
+    );
+    // find users by id
+    const users = await User.find({'_id': { $in: arrIds }});
+    // Data from server
+    const data = {usuarios: users, formato: req.body.formato};
+    // Append the card's data to the user's format data
+    data.formato = {nombre: req.body.formato,content};
     // Tools for puppeteer to know what to do
     const compile = async (templateName,data) => {
         // Concat the file path of the handlebar
@@ -44,7 +44,7 @@ cardController.getCard = async (req, res) => {
         // Defining html
         const html = await fs.readFile(filePath, 'utf-8');
         // What to compile
-        return hbs.compile(html)(data);
+        return hbs.compile(html)(data,{allowedProtoProperties:{trim:true}});
     };
     // For date format
     hbs.registerHelper('dateFormat', (value, format) => {
@@ -60,7 +60,7 @@ cardController.getCard = async (req, res) => {
             });
         const page = await browser.newPage();
         // NAME OF THE HANDLEBAR FILE AND IT'S DATA
-        const content = await compile(data.formato,data);
+        const content = await compile(data.formato.nombre,data);
 
         await page.setContent(content);
         await page.emulateMediaFeatures('screen'); //For images

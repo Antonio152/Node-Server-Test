@@ -219,6 +219,16 @@
 </style>
 <html>
     <body>
+        {{!-- Datos obtenidos desde el servidor --}}
+        {{!-- Estos son los datos que se deben colocar en su lugar --}}
+        <p>{{usuarios.[0].username}}</p>
+        <p>{{formato.content.nombreCredencial}}</p>
+        <p>contenido - imageFront: {{formato.content.contenido.[0].imagenFront}}</p>
+        <p>contenido - imagenBack: {{formato.content.contenido.[0].imagenBack}}</p>
+        <p>firmas - firmaDirectivo: {{formato.content.firmas.[0].firmaDirectivo}}</p>
+        <p>logos - institucion: {{formato.content.logos.[0].institucion}}</p>
+        <p>logos - sep: {{formato.content.logos.[0].sep}}</p>
+        <p>contAd - periodosEscolares: {{formato.content.contAd.[0].periodosEscolares}}</p>
         {{!-- Para cada uno de los usuarios del req --}}
         {{#each usuarios as |user|}}
         <div class="columns">
