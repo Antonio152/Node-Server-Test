@@ -16,6 +16,8 @@ const hbs = allowInsecurePrototypeAccess(handlebars);
 
 // This is actually a post request
 cardController.getCard = async (req, res) => {
+  // EL QUE SE ENCARGUE DE EDITARLO, BUSQUE LA FORMA DE DIVIDIR TODO ESTE DESMADRE
+
     var arrIds = [];
     //CONSULTAMOS EL REGISTRO DE LA BD
     const query = req.body.formato.toString();
