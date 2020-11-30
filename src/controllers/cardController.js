@@ -38,7 +38,17 @@ cardController.getCard = async (req, res) => {
     // Data from server
     const data = {usuarios: users, formato: req.body.formato};
     // Append the card's data to the user's format data
-    data.formato = {nombre: req.body.formato,content};
+    data.formato = {nombre: req.body.formato};
+    const tamanio= users.length;
+    //Ingresamos el contenido dentro de cada usuario
+    for (let step = 0; step < tamanio; step++) {
+        data.usuarios[step].contenido=content.contenido;
+        data.usuarios[step].firmas=content.firmas;
+        data.usuarios[step].logos=content.logos;
+        data.usuarios[step].contAd=content.contAd;
+    }
+
+    //console.log(data.usuarios);
     // Tools for puppeteer to know what to do
     const compile = async (templateName,data) => {
         // Concat the file path of the handlebar

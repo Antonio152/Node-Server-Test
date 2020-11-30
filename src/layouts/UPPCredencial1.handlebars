@@ -221,27 +221,20 @@
     <body>
         {{!-- Datos obtenidos desde el servidor --}}
         {{!-- Estos son los datos que se deben colocar en su lugar --}}
-        <p>{{usuarios.[0].username}}</p>
-        <p>{{formato.content.nombreCredencial}}</p>
-        <p>contenido - imageFront: {{formato.content.contenido.[0].imagenFront}}</p>
-        <p>contenido - imagenBack: {{formato.content.contenido.[0].imagenBack}}</p>
-        <p>firmas - firmaDirectivo: {{formato.content.firmas.[0].firmaDirectivo}}</p>
-        <p>logos - institucion: {{formato.content.logos.[0].institucion}}</p>
-        <p>logos - sep: {{formato.content.logos.[0].sep}}</p>
-        <p>contAd - periodosEscolares: {{formato.content.contAd.[0].periodosEscolares}}</p>
+       
         {{!-- Para cada uno de los usuarios del req --}}
+           
         {{#each usuarios as |user|}}
         <div class="columns">
-
         <div class="credencial">
             <div class="fila justificado">
                 <div class="fila cred-lado">
                     <div class="fila">
                         <div class="columns">
-                            <img src="http://localhost:4000/FONDO FRENTE.png" class="fondo" alt="" />
+                            <img src="{{user.contenido.[0].imagenFront}}" class="fondo" alt="" />
                             <div class="fila datos-cred">
                                 <div class="cred-images">
-                                    <img src="http://localhost:4000/LOGO.png" class="escudo" alt="img"/>
+                                    <img src='{{user.logos.[0].institucion}}' class="escudo" alt="img"/>
                                 </div>
                                 <div class="datos-inst" style="color:#461E68">
                                     {{!-- Datos de la universidad --}}
@@ -292,13 +285,13 @@
                 <div class=" fila cred-lado lado-der">
                     
                     <div class="fondo ">
-                        <img src="http://localhost:4000/FONDO ATRAS.png" class="fondo" alt="" />
+                        <img src="{{user.contenido.[0].imagenBack}}" class="fondo" alt="" />
                         <div class="fila datos-cred justificado">
                             <div class="direccion-academica">
                                 <div class="firma-director">
                                     <div class="absoluto-centrado">
                                         <div class="relativo-centrado">
-                                            <img class="img-firma-director" src="http://localhost:4000/FIRMA.png" alt=""/>
+                                            <img class="img-firma-director" src="{{user.firmas.[0].firmaDirectivo}}" alt=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +303,7 @@
                                 </div>
                             </div>
                             <div class="inst-superior">
-                                <img class="img-inst-superior" src="http://localhost:4000/SEP.png" alt=""/>
+                                <img class="img-inst-superior" src="{{user.logos.[0].sep}}" alt=""/>
                             </div>
                         </div>
                         <div class="columns datos-cred">
@@ -328,7 +321,7 @@
                         
                         <div class="fila datos-cred justificado">
                             <div class="columns">
-                                <img class="periodoBack" src="http://localhost:4000/PERIODOB.png" alt=""/>
+                                <img class="periodoBack" src="{{user.contAd.[0].periodosEscolares}}" alt=""/>
                                 <p id="valorAnio" style="display: none">{{user.academico.[0].registro}}</p> 
                                 <script> 
                                     var anioR= document.getElementById('valorAnio');
@@ -488,12 +481,6 @@
         </div>
         </div>
         <br/><br/>
-        <p id="dataCard">{{user.credencial.[0].sep}}</p>
-        <p id="dataCard">->>>>{{user.nombreCred}}</p>
-        <p id="dataCard">{{user.credencialArray}}</p>
-            {{#each user.credencialArray as |logos|}}
-            <p id="dataCard">{{logos.sep}}</p>
-            {{/each}}
         {{/each}}
     </body>
 </html>
