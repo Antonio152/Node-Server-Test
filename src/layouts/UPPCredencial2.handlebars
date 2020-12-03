@@ -137,6 +137,7 @@
         font-size: 13px;
         text-align: center;
         z-index: 10;
+        text-transform:uppercase;
     }
 
     /* Datos de la dirección de la institución */
@@ -272,7 +273,7 @@
     <div class="columns">
         <div class="credencial">
             <div class="fila justificado">
-                <div class="fila cred-lado">
+                <div class="cred-lado">
                     <img src="{{user.contenido.[0].imagenFront}}" class="fondo" alt="" />
                     <div class="columns">
                         <div class="fila datos-cred" style="margin-bottom: 5px;">
@@ -353,6 +354,7 @@
                         <div class="fila datos-cred justificado" style="margin-top: 3px;">
                             <div class="columns" style="margin-left: 10px;">
                                 <img class="periodoBack" src="{{user.contAd.[0].periodosEscolares}}" alt=""/>
+                            </div>
                         </div>
                         <div class="fila" style="margin-left: 130px;">
                             <div class="linea-vertical" style="background: #461E68; height: 90%; padding-left: 1px;" />
@@ -382,7 +384,8 @@
                     <br />
                 </div>
             </div>
-            <br /><br />
-        {{/each}}
-    </body>
+        </div>
+    </div>
+    {{/each}}
+</body>
 </html>
