@@ -22,7 +22,12 @@ const userSchema = new Schema({
     sanguineo: String,
     contacto: [{
         telefono: String,
-        email:String,
+        email:{
+            type: String,
+            required: true,
+            trime: true, // clean the username extra spaces
+            unique: true // not repeated data
+        },
         telEmergencia:String
     }],
     direccion: [{
@@ -55,6 +60,8 @@ const userSchema = new Schema({
         registro:String,
         estatus:Boolean
     }],
+    reestablecimiento: String,
+    bloqueado: Boolean,
     published: Boolean
     }, { 
     timestamps: true 

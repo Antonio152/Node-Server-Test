@@ -478,7 +478,12 @@
             <br/>
         </div>
         </div>
-        <br/><br/>
+        
+        {{#ifIsNthItem nth=3}}
+            <div style="margin-top: 150px;"/>
+        {{else}}
+            <br/><br/>
+        {{/ifIsNthItem}}
         {{/each}}
     </body>
 </html>
