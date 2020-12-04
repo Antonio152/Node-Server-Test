@@ -199,6 +199,7 @@
 
     .letra-pequeña {
         font-size: 5px;
+        margin-left: 4px;
     }
 
     .texto-centrado {
@@ -221,35 +222,35 @@
 
     /* Periodo académico */
     .periodo {
-        height: 20px;
-        margin-left: 4px;
-        margin-left: 2px;
+        height: 50px;
     }
 
      /*ELEMENTOS NUEVOS DE PERIODO*/
     .periodoBack{
-        height: 45px;
+        height: 55px;
         position: absolute;
         z-index: 0;
+        margin-left: 15px;
+        margin-top: 8px;
     }
     .periodoCont{
-        width: 55px;
+        width: 110px;
         position: relative;
-        margin-top: 10px;
-        margin-left: 2px;
+        margin-top: 21px;
+        margin-left: 25px;
         
     }
     .periodoCont p{
         margin-top: -2px;
         margin-left: 1px;
+        font-size: 14.5px;
     }
     .periodosNum{
         position: absolute;
-        font-size: 10px;
-        margin-top: 2px;
-        margin-left: -0.5px;
+        font-size: 9.5px;
+        margin-top: 8px;
+        margin-left: 15px;
     }
-
     /* Línea vertical de la credencial */
     .linea-vertical {
         background: rgb(180, 180, 180);
@@ -260,6 +261,7 @@
 
     .credencial {
         font-family: Arial, Helvetica, sans-serif;
+        margin-bottom: 50px;
     }
 
     p{
@@ -328,11 +330,11 @@
                             <div class="fila direccion-academica">
                                 <div class="absoluto-centrado" style="margin-top: 5px;">
                                     <div class="relativo-centrado">
-                                        <img style="height: 40px;width=70px;" src="{{user.logos.[0].universidad}}"
+                                        <img style="height: 40px;width=70px;margin-right=6px" src="{{user.logos.[0].universidad}}"
                                             alt="" />
-                                        <img style="height: 40px;width=40px;" src="{{user.logos.[0].gobierno}}"
+                                        <img style="height: 40px;width=40px;margin-right=6px" src="{{user.logos.[0].gobierno}}"
                                             alt="" />
-                                        <img style="height: 40px;width=40px;" src="{{user.logos.[0].estado}}"
+                                        <img style="height: 40px;width=40px;margin-right=6px" src="{{user.logos.[0].estado}}"
                                             alt="" />
                                     </div>
                                 </div>
@@ -351,7 +353,7 @@
                                     administrativos</p>
                             </div>
                         </div>
-                      {{!--  <div class="fila datos-cred justificado">
+                      <div class="fila datos-cred justificado">
                             <div class="columns">
                                 <img class="periodoBack" src="{{user.contAd.[0].periodosEscolares}}" alt=""/>
                                 <p id="valorAnio" style="display: none">{{user.academico.[0].registro}}</p> 
@@ -488,12 +490,12 @@
                             </script>   
                             </div>
                             </div>
-                            </div>--}}
+                            </div>
                         <div class="fila" style="align-items: right;">
                             <div class="linea-vertical" style="background: #461E68; height: 90%; padding-left: 1px;" />
                         </div>
-                        <div class="fila datos-cred" style="align-items: right;">
-                            <div class="columns" style="justify-content: center;align-items: center; margin:5px; text-align: center;">
+                        <div class="fila datos-cred" style="margin-top:-35px;">
+                            <div class="columns" style="justify-content: center;align-items: center; margin:5px; text-align: center;margin-left:145px;margin-top:-10px;margin-right:0px;">
                                 <img style="width: 50px;" src="{{user.firmas.[0].firmaDirectivo}}" alt="" />
                                 <p class="nombre">Dr. Marco Antonio </p>
                                 <p class="nombre">Flores Gonzáles</p>
@@ -501,7 +503,7 @@
                             </div>
                             <div class="columns" style="align-items: right;">
                                 <div class="letra-pequeña" style="text-align: right;">
-                                    <div>
+                                    <div style="margin-top:-2px;margin-left:4px;">
                                         <b>Universidad Politécnica de Pachuca</b></br>Carr. Pachuca-Ciudad
                                         Sahagún
                                         km 20.</br>Ex Hacienda de Sta.Bárbara,</b></b> Zempoala, Hidalgo.</br></b>C.P. 43830
@@ -510,7 +512,7 @@
                                     </div>
                                 </div>
                             </div style="align-items: right;">
-                            <img style="width: 35px; height: 35px;" src="{{user.qr}}" alt="" />
+                            <img style="width: 35px; height: 35px;margin-left:3px;margin-top:-7px;" src="{{user.qr}}" alt="" />
                         </div>
                        </div>
                     </div>
