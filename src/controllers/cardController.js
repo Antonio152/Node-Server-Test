@@ -17,7 +17,7 @@ const hbs = allowInsecurePrototypeAccess(handlebars);
 // This is actually a post request
 cardController.getCard = async (req, res) => {
   // EL QUE SE ENCARGUE DE EDITARLO, BUSQUE LA FORMA DE DIVIDIR TODO ESTE DESMADRE
-
+//----------------------------------------------------------------------------------------------
     var arrIds = [];
     //CONSULTAMOS EL REGISTRO DE LA BD
     const query = req.body.formato.toString();
@@ -32,7 +32,7 @@ cardController.getCard = async (req, res) => {
     // Transforming ids to mongoose readable id objects
     req.body.usuarios.forEach(idUser => 
       arrIds.push(mongoose.Types.ObjectId(idUser))
-    );
+    );//----------------------------------------------------------------------------------------------
     // find users by id
     const users = await User.find({'_id': { $in: arrIds }});
     // Data from server
@@ -47,7 +47,7 @@ cardController.getCard = async (req, res) => {
         data.usuarios[step].logos=content.logos;
         data.usuarios[step].contAd=content.contAd;
     }
-
+//----------------------------------------------------------------------------------------------
     //console.log(data.usuarios);
     // Tools for puppeteer to know what to do
     const compile = async (templateName,data) => {
@@ -73,7 +73,7 @@ cardController.getCard = async (req, res) => {
         const page = await browser.newPage();
         // NAME OF THE HANDLEBAR FILE AND IT'S DATA
         const content = await compile(data.formato.nombre,data);
-
+//----------------------------------------------------------------------------------------------
         await page.setContent(content);
         await page.emulateMediaFeatures('screen'); //For images
         // How does the pdf will be developed
@@ -90,7 +90,7 @@ cardController.getCard = async (req, res) => {
         res.json({
             pdf: base64
         })
-
+//----------------------------------------------------------------------------------------------
     } catch (error) {
         res.json({
             msg: error.toString()
