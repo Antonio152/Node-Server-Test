@@ -55,6 +55,18 @@ userCtrl.createUser = async (req, res) => {
         const dtqr= req.body.nombre+' '+req.body.aPaterno+' '+req.body.aMaterno+' - '+req.body.academico[0].matricula+' - '+statusA;
         const QR= await qrcode.toDataURL(dtqr)
         req.body.qr = QR;   
+
+    // Verificación de email y usuario único 
+    const email  = req.body.contacto[0].email;
+    const user = await User.findOne( {$or: [{'contacto.0.email': email}, {'username': req.body.username}]});
+    if (user) {
+        res.json({
+            existente: true,
+            message: 'Ya existe un usuario registrado con ese email o nombre de usuario.'
+        });
+        return;
+    }
+
     // Creamos la base de datos y comprobamos el estado.
     const usuario = new User({
         username: req.body.username,

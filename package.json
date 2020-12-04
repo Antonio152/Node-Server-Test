@@ -25,6 +25,8 @@
     "moment": "^2.29.1",
     "mongoose": "^5.10.7",
     "path": "^0.12.7",
+    "nodemailer": "^5.1.1",
+    "nodemailer-express-handlebars": "^4.0.0",
     "puppeteer": "^5.4.1",
     "puppeteer-core": "^5.4.1",
     "qrcode": "^1.4.4"
