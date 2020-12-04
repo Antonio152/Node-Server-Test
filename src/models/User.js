@@ -52,7 +52,7 @@ const userSchema = new Schema({
             min: 1,
             max: 10
         },
-        registro:Date,
+        registro:String,
         estatus:Boolean
     }],
     published: Boolean
